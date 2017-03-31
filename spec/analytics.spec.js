@@ -9,7 +9,7 @@ function trigger_phonegap_cli() {
 describe('PhoneGap Analytics', function() {
     beforeEach(function() {
         // ensure we dont prompt for turning analytics on
-        spyOn(cli.prototype.analytics, 'statusUnknown').andReturn(false);
+        spyOn(cli.prototype.analytics, 'statusUnknown').and.returnValue(false);
     });
     it('should pass error objects from command invocations to analytics', function() {
         var fake_error = {message: 'yo dawg'};
@@ -23,7 +23,7 @@ describe('PhoneGap Analytics', function() {
     describe('trackEvent', function() {
         var post_spy;
         beforeEach(function() {
-            spyOn(analytics, 'hasOptedOut').andReturn(false);
+            spyOn(analytics, 'hasOptedOut').and.returnValue(false);
             post_spy = spyOn(request, 'post');
         });
         it('should POST to metrics.phonegap.com on successfully-parsed commands', function() {
