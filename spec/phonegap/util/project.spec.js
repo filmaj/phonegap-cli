@@ -30,7 +30,7 @@ describe('project', function() {
 
         describe('when in project path', function() {
             beforeEach(function() {
-                spyOn(cdvutil, 'isCordova').andCallFake(function(_path) {
+                spyOn(cdvutil, 'isCordova').and.callFake(function(_path) {
                     return true;
                 });
             });
@@ -43,7 +43,7 @@ describe('project', function() {
         describe('when in a subdirectory of the project path', function() {
             beforeEach(function() {
                 currentPath = path.join(projectPath, 'lib', 'phonegap');
-                spyOn(cdvutil, 'isCordova').andCallFake(function(_path) {
+                spyOn(cdvutil, 'isCordova').and.callFake(function(_path) {
                     return _path === projectPath;
                 });
             });
@@ -67,7 +67,7 @@ describe('project', function() {
             });
 
             it('should ignore home directory .cordova/', function() {
-                spyOn(project, 'isHome').andReturn(true);
+                spyOn(project, 'isHome').and.returnValue(true);
                 chdir(currentPath, function() {
                     expect(project.cd(delegate)).toBeNull();
                 });
@@ -100,7 +100,7 @@ describe('project', function() {
 
 
         beforeEach(function() {
-            spyOn(cdvutil, 'listPlatforms').andCallFake(function() {
+            spyOn(cdvutil, 'listPlatforms').and.callFake(function() {
                 return exampleOut;
             });
         });
@@ -135,7 +135,7 @@ describe('project', function() {
 
         beforeEach(function() {
             packagepath = path.join(__dirname, '..', '..', '..', 'package.json');
-            spyOn(JSON,'parse').andReturn({});
+            spyOn(JSON,'parse').and.returnValue({});
         });
 
         it('should be defined', function() {
@@ -152,8 +152,8 @@ describe('project', function() {
             fixtureContent = 'aabbcc';
 
         beforeEach(function() {
-            createSpyObj('fs', ['open','readFile']);
-            spyOn(fs,'readFile').andReturn(null,'');
+            jasmine.createSpyObj('fs', ['open','readFile']);
+            spyOn(fs,'readFile').and.returnValue(null,'');
         });
 
         it('should be defined clue', function() {
