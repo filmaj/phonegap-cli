@@ -24,42 +24,42 @@ describe('phonegap help create', function() {
     describe('$ phonegap help', function() {
         it('should include the command', function() {
             cli.argv(argv.concat(['help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/\r?\n\s+create <path>.*\r?\n/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/\r?\n\s+create <path>.*\r?\n/i);
         });
     });
 
     describe('$ phonegap create', function() {
         it('should output usage info', function() {
             cli.argv(argv.concat(['create']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ create/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
         });
     });
 
     describe('$ phonegap help create', function() {
         it('should output usage info', function() {
             cli.argv(argv.concat(['help', 'create']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ create/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
         });
     });
 
     describe('$ phonegap create help', function() {
         it('should output usage info', function() {
             cli.argv(argv.concat(['create', 'help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ create/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
         });
     });
 
     describe('$ phonegap create --help', function() {
         it('should output usage info', function() {
             cli.argv(argv.concat(['create', '--help']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ create/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
         });
     });
 
     describe('$ phonegap create -h', function() {
         it('should output usage info', function() {
             cli.argv(argv.concat(['create', '-h']));
-            expect(stdout.mostRecentCall.args[0]).toMatch(/usage: [\S]+ create/i);
+            expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
         });
     });
 });
