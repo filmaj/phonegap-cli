@@ -18,5 +18,4 @@ describe('phonegap share', function() {
     });
     it('should delegate to the phonegap/share module');
     it('should pass errors from the phonegap/share module to the provided callback');
-
 });

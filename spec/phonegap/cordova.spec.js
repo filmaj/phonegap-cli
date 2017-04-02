@@ -373,7 +373,7 @@ describe('phonegap.cordova(options, [callback])', function() {
             expect(shell.cp).toHaveBeenCalled();
             expect(shell.cp.calls.count()).toEqual(2);
             var first_args = shell.cp.calls.argsFor(0);
-            var second_args = shell.cp.calls.argsFor(1)
+            var second_args = shell.cp.calls.argsFor(1);
             expect(first_args[1]).toMatch(/ios.*cordova\.js/);
             expect(first_args[2]).toMatch(/ios.*phonegap\.js/);
             expect(second_args[1]).toMatch(/android.*cordova\.js/);
