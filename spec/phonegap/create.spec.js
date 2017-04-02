@@ -23,23 +23,25 @@ describe('phonegap.create(options, [callback])', function() {
         options = {
             path: path.resolve('spec', 'fixture', 'app-with-config', 'www')
         };
-        configParserSpy = {
+        configParserSpy = function() {
+        };
+        configParserSpy.prototype = {
             setPackageName: jasmine.createSpy(),
             setName: jasmine.createSpy(),
             write: jasmine.createSpy()
         };
-        spyOn(phonegap, 'version').andReturn({ phonegap: '2.8.0' });
+        spyOn(phonegap, 'version').and.returnValue({ phonegap: '2.8.0' });
         spyOn(phonegap, 'cordova');
-        spyOn(network, 'isOnline').andCallFake(function(callback) {
+        spyOn(network, 'isOnline').and.callFake(function(callback) {
             callback(false); // offline by default to speed up tests
         });
         spyOn(cordova, 'config');
-        spyOn(cordovaLib, 'configparser').andReturn(configParserSpy);
+        spyOnProperty(cordovaLib, 'configparser').and.returnValue(configParserSpy);
         spyOn(shell, 'rm');
         spyOn(shell, 'cp');
         spyOn(fs, 'renameSync');
         spyOn(fs, 'existsSync');
-        spyOn(fs, 'statSync').andReturn({
+        spyOn(fs, 'statSync').and.returnValue({
             isDirectory: function() { return false; } // template is not cached
         });
 
@@ -171,14 +173,14 @@ describe('phonegap.create(options, [callback])', function() {
 
     describe('successfully created a project', function() {
         beforeEach(function() {
-            phonegap.cordova.andCallFake(function(options, callback) {
+            phonegap.cordova.and.callFake(function(options, callback) {
                 callback(null);
             });
         });
 
         describe('when my-app/www/config.xml exists', function() {
             beforeEach(function() {
-                fs.existsSync.andReturn(true);
+                fs.existsSync.and.returnValue(true);
             });
 
             it('should move it to my-app/config.xml', function(done) {
@@ -192,7 +194,7 @@ describe('phonegap.create(options, [callback])', function() {
 
         describe('when my-app/www/config.xml does not exist', function() {
             beforeEach(function() {
-                fs.existsSync.andReturn(false);
+                fs.existsSync.and.returnValue(false);
             });
 
             it('should not move it to my-app/config.xml', function(done) {
@@ -206,7 +208,7 @@ describe('phonegap.create(options, [callback])', function() {
 
         describe('when config.xml does not exist', function() {
             beforeEach(function() {
-                fs.existsSync.andReturn(false);
+                fs.existsSync.and.returnValue(false);
             });
 
             it('should trigger a "warn" event', function(done) {
@@ -244,7 +246,7 @@ describe('phonegap.create(options, [callback])', function() {
 
     describe('failed to create a project', function() {
         beforeEach(function() {
-            phonegap.cordova.andCallFake(function(options, callback) {
+            phonegap.cordova.and.callFake(function(options, callback) {
                 callback(new Error('path already exists'));
             });
         });
