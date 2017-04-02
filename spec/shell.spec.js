@@ -59,4 +59,22 @@ describe('$ phonegap [options] commands', function() {
             expect(process.exitCode).toEqual(1337);
         });
     });
+
+    describe('analytics prompts when analytics status is not known', function() {
+        beforeEach(function() {
+            cli.prototype.analytics.statusUnknown.and.returnValue(true);
+            spyOn(cli.prototype, 'argv');
+            spyOn(cli.prototype.analytics, 'prompt');
+        });
+        it('should not prompt when passed the analytics command', function() {
+            process.argv = ['node', 'phonegap.js', 'analytics'];
+            trigger_phonegap_cli();
+            expect(cli.prototype.analytics.prompt).not.toHaveBeenCalled();
+        });
+        it('should prompt regarding analytics for non-analytics related commands', function() {
+            process.argv = ['node', 'phonegap.js', 'test'];
+            trigger_phonegap_cli();
+            expect(cli.prototype.analytics.prompt).toHaveBeenCalled();
+        });
+    });
 });
