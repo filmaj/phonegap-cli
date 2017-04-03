@@ -51,7 +51,8 @@
     "chdir": "0.0.x",
     "eslint": "^3.12.2",
     "istanbul": "0.4.5",
-    "jasmine": "git://github.com/pivotal/jasmine.git#7f8f2b5"
+    "jasmine": "git://github.com/pivotal/jasmine.git#7f8f2b5",
+    "rewire": "2.5.2"
   },
   "optionalDependencies": {},
   "contributors": [
