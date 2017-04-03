@@ -4,6 +4,7 @@
 
 var phonegap = require('../../lib/main'),
     CLI = require('../../lib/cli'),
+    create = require('../../lib/cli/create'),
     argv,
     cli,
     stdout;
@@ -60,6 +61,21 @@ describe('phonegap help create', function() {
         it('should output usage info', function() {
             cli.argv(argv.concat(['create', '-h']));
             expect(stdout.calls.mostRecent().args[0]).toMatch(/usage: [\S]+ create/i);
+        });
+    });
+});
+
+describe('lib/cli/create module', function() {
+    describe('failure', function() {
+        it('should invoke passed callback with the right error object', function(done) {
+            spyOn(phonegap, 'create').and.callFake(function(data, cb) {
+                cb({boom:true}); // fake an error happening
+            });
+            create({_:['some-app', 'my.sweet.id']}, function(error) {
+                expect(error).toBeDefined();
+                expect(error.boom).toEqual(true);
+                done();
+            });
         });
     });
 });
